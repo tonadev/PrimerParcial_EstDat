@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.io.IOException;
 
 public class Lexer {
@@ -76,10 +77,18 @@ public class Lexer {
   }
 
   public static void main(String args[]) {
+    BufferedReader entrada = null;
+    String nombreArchivo;
     Lexer lex = new Lexer();
     try {
-      lex.analizar("test.txt");
-    } catch (Exception e) {
+      entrada = new BufferedReader(new InputStreamReader(System.in)); 
+      System.out.println("Ingrese el nombre del archivo a analizar (con la extensión del archivo).");
+      System.out.print("> ");
+      nombreArchivo = entrada.readLine();
+      lex.analizar(nombreArchivo);
+    } catch (FileNotFoundException fe) {
+      System.out.println("¡Error! No se ha encontrado el archivo.");
+    }catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
